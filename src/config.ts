@@ -1,5 +1,5 @@
 
-let typeOrmConfig = {
+const  typeOrmConfig = {
     type: 'mysql',
     host: 'localhost',
     port: 3306,
@@ -11,6 +11,6 @@ let typeOrmConfig = {
     entities: ["src/models/entitys/**/*.ts"]
     //entities: ["dist/models/entitys/**/*.js"]
 
-};
+} as any;
 
 export { typeOrmConfig };
