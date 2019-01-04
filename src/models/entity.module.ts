@@ -5,6 +5,7 @@ import { EChangwat } from './entitys/changwat.entity';
 import { ETambon } from './entitys/tambon.entity';
 import { EVillage } from './entitys/village.entity';
 import { EHospital } from './entitys/hospital.entity';
+import { EUser } from './entitys/user.entity';
 
 @Module({
     imports: [
@@ -13,6 +14,7 @@ import { EHospital } from './entitys/hospital.entity';
       TypeOrmModule.forFeature([ETambon]),
       TypeOrmModule.forFeature([EVillage]),
       TypeOrmModule.forFeature([EHospital]),
+      TypeOrmModule.forFeature([EUser]),
       
     ],
     providers: [
