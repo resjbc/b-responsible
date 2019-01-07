@@ -6,6 +6,8 @@ import { ETambon } from './entitys/tambon.entity';
 import { EVillage } from './entitys/village.entity';
 import { EHospital } from './entitys/hospital.entity';
 import { EUser } from './entitys/user.entity';
+import { EResponsible } from './entitys/responsible.entity';
+import { EWork } from './entitys/work.entity';
 
 @Module({
     imports: [
@@ -15,7 +17,8 @@ import { EUser } from './entitys/user.entity';
       TypeOrmModule.forFeature([EVillage]),
       TypeOrmModule.forFeature([EHospital]),
       TypeOrmModule.forFeature([EUser]),
-      
+      TypeOrmModule.forFeature([EResponsible]),
+      TypeOrmModule.forFeature([EWork]),
     ],
     providers: [
      
