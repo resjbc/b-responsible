@@ -33,4 +33,8 @@ export class EUser {
     @Column()
     date_updated: Date;
 
+    @Column()
+    role: number;
+
+
 }

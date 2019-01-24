@@ -12,10 +12,9 @@ export class EResponsible {
     @PrimaryColumn()
     id_work: number;
 
-    @Column('varchar', { length: "255" , nullable: false})
-    username: string;
+    @Column()
+    date_created: Date;
 
-    @Column('varchar', { length: "255" , nullable: false})
-    password: string;
-
+    @Column()
+    date_updated: Date;
 }
