@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { EVillage } from "./village.entity";
+import { EResponsible } from "./responsible.entity";
 
 @Entity('user_responsible')
 export class EUser {
@@ -36,5 +38,6 @@ export class EUser {
     @Column()
     role: number;
 
-
+    @ManyToMany(type => EVillage, village => village.users)
+    villages: EVillage[];
 }

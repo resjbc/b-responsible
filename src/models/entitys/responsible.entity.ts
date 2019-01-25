@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable, OneToOne } from "typeorm";
+import { EUser } from "./user.entity";
+import { EVillage } from "./village.entity";
 
 @Entity('responsible_responsible')
 export class EResponsible {
@@ -17,4 +19,12 @@ export class EResponsible {
 
     @Column()
     date_updated: Date;
+
+    /*@OneToOne(() => EUser)
+    @JoinColumn()
+    user: EUser;
+
+    @OneToOne(() => EVillage)
+    @JoinColumn()
+    village: EVillage;*/
 }
