@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, ManyToMany, JoinTable, JoinColumn, OneToMany, Index } from "typeorm";
 import { EUser } from "./user.entity";
+import { EResponsible } from "./responsible.entity";
 
 @Entity('cvillage_responsible')
 export class EVillage {
@@ -25,8 +26,7 @@ export class EVillage {
     @Column({ length: "1" , nullable: true})
     flag_status: string;
 
-    @ManyToMany(type => EUser, user => user.villages)
-    @JoinTable({name: "responsible_responsible"})
-    users: EUser[];
+    @OneToMany(type => EResponsible, responsible => responsible.village)
+    responsibles: EResponsible[];
 
 }

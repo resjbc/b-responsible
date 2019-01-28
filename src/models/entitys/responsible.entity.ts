@@ -1,15 +1,29 @@
-import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany, JoinColumn, JoinTable, OneToOne, OneToMany, ManyToOne } from "typeorm";
 import { EUser } from "./user.entity";
 import { EVillage } from "./village.entity";
+import { EWork } from "./work.entity";
 
 @Entity('responsible_responsible')
+//@Index(["r_villagecode", "r_villagecodefull", "r_tamboncode", "r_ampurcode", "r_changwatcode"])
 export class EResponsible {
 
     @PrimaryColumn()
-    id_user: string;
+    r_id_user: string;
 
-    @PrimaryColumn()
-    villagecode: string;
+    @PrimaryColumn('varchar', { length: "2", nullable: false })
+    r_villagecode: string;
+
+    @PrimaryColumn('varchar', { length: "8", nullable: false })
+    r_villagecodefull: string;
+
+    @PrimaryColumn('varchar', { length: "6", nullable: false })
+    r_tamboncode: string;
+
+    @PrimaryColumn('varchar', { length: "4", nullable: false })
+    r_ampurcode: string;
+
+    @PrimaryColumn('varchar', { length: "2", nullable: false })
+    r_changwatcode: string;
 
     @PrimaryColumn()
     id_work: number;
@@ -20,11 +34,25 @@ export class EResponsible {
     @Column()
     date_updated: Date;
 
-    /*@OneToOne(() => EUser)
-    @JoinColumn()
+    @ManyToOne(type => EUser, user => user.responsibles)
+    @JoinColumn({ name: 'r_id_user', referencedColumnName: 'id_user' })
     user: EUser;
 
-    @OneToOne(() => EVillage)
-    @JoinColumn()
-    village: EVillage;*/
+    @ManyToOne(type => EVillage, village => village.responsibles, {
+        nullable: true,
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE"
+    })
+    /*@JoinColumn([
+        { name: 'r_villagecodefull', referencedColumnName: 'villagecodefull' },
+        { name: 'r_villagecode', referencedColumnName: 'villagecode' },
+        { name: 'r_tamboncode', referencedColumnName: 'tamboncode' },
+        { name: 'r_ampurcode', referencedColumnName: 'ampurcode' },
+        { name: 'r_changwatcode', referencedColumnName: 'changwatcode' },
+    ])*/
+    village: EVillage;
+
+    @ManyToOne(type => EWork, work => work.responsibles)
+    @JoinColumn({ name: 'id_work', referencedColumnName: 'id_work' })
+    work: EWork;
 }
