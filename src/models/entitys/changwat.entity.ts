@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
+import { EAmphur } from "./amphur.entity";
 
 @Entity('cchangwat_responsible')
 export class EChangwat {
@@ -11,5 +12,8 @@ export class EChangwat {
 
     @Column({ length: "2" , nullable: true})
     zonecode: string;
+
+    @OneToMany(type => EAmphur, amphur => amphur.changwat)
+    amphurs: EAmphur[];
 
 }

@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryColumn, Index } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import { EChangwat } from "./changwat.entity";
+import { ETambon } from "./tambon.entity";
 
 @Entity('campur_responsible')
 export class EAmphur {
@@ -18,5 +20,13 @@ export class EAmphur {
 
     @Column({ length: "1" , nullable: true})
     flag_status: string;
+
+    @ManyToOne(type => EChangwat, changwat => changwat.amphurs)
+    @JoinColumn({ name: 'changwatcode' })
+    changwat: EChangwat;
+
+    @OneToMany(type => ETambon, tombon => tombon.amphur)
+    tambons: ETambon[];
+
 
 }

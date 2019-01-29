@@ -12,13 +12,13 @@ import { EWork } from './entitys/work.entity';
 @Module({
     imports: [
       TypeOrmModule.forFeature([EChangwat]),
-      TypeOrmModule.forFeature([EResponsible]),
       TypeOrmModule.forFeature([EAmphur]),
       TypeOrmModule.forFeature([ETambon]),
       TypeOrmModule.forFeature([EVillage]),
       TypeOrmModule.forFeature([EHospital]),
       TypeOrmModule.forFeature([EUser]),
       TypeOrmModule.forFeature([EWork]),
+      TypeOrmModule.forFeature([EResponsible]),
     ],
     providers: [
      

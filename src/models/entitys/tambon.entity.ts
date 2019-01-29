@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryColumn, Index } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { EAmphur } from "./amphur.entity";
+import { EVillage } from "./village.entity";
 
 @Entity('ctambon_responsible')
 export class ETambon {
@@ -21,5 +23,12 @@ export class ETambon {
 
     @Column({ length: "2" , nullable: true})
     flag_status: string;
+
+    @ManyToOne(type => EAmphur, amphur => amphur.tambons)
+    @JoinColumn({ name: 'ampurcode' ,referencedColumnName: 'ampurcodefull'})
+    amphur: EAmphur;
+
+    @OneToMany(type => EVillage, village => village.tambon)
+    villages: EVillage[];
 
 }

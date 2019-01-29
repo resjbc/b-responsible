@@ -16,14 +16,16 @@ export class EResponsible {
     @PrimaryColumn('varchar', { length: "8", nullable: false })
     r_villagecodefull: string;
 
-    @PrimaryColumn('varchar', { length: "6", nullable: false })
+   /* @PrimaryColumn('varchar', { length: "6", nullable: false })
     r_tamboncode: string;
 
     @PrimaryColumn('varchar', { length: "4", nullable: false })
     r_ampurcode: string;
 
     @PrimaryColumn('varchar', { length: "2", nullable: false })
-    r_changwatcode: string;
+    r_changwatcode: string;*/
+
+
 
     @PrimaryColumn()
     id_work: number;
@@ -38,18 +40,12 @@ export class EResponsible {
     @JoinColumn({ name: 'r_id_user', referencedColumnName: 'id_user' })
     user: EUser;
 
-    @ManyToOne(type => EVillage, village => village.responsibles, {
-        nullable: true,
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-    })
-    /*@JoinColumn([
-        { name: 'r_villagecodefull', referencedColumnName: 'villagecodefull' },
-        { name: 'r_villagecode', referencedColumnName: 'villagecode' },
-        { name: 'r_tamboncode', referencedColumnName: 'tamboncode' },
-        { name: 'r_ampurcode', referencedColumnName: 'ampurcode' },
-        { name: 'r_changwatcode', referencedColumnName: 'changwatcode' },
-    ])*/
+    @ManyToOne(type => EVillage, village => village.responsibles)
+    @JoinColumn({ name: 'r_villagecodefull', referencedColumnName: 'villagecodefull' })
+    @JoinColumn({ name: 'r_villagecode', referencedColumnName: 'villagecode' })
+    /*@JoinColumn({ name: 'r_tamboncode', referencedColumnName: 'tamboncode' })
+    @JoinColumn({ name: 'r_ampurcode', referencedColumnName: 'ampurcode' })
+    @JoinColumn({ name: 'r_changwatcode', referencedColumnName: 'changwatcode' })*/
     village: EVillage;
 
     @ManyToOne(type => EWork, work => work.responsibles)
