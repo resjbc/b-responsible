@@ -40,7 +40,9 @@ export class EResponsible {
     @JoinColumn({ name: 'r_id_user', referencedColumnName: 'id_user' })
     user: EUser;
 
-    @ManyToOne(type => EVillage, village => village.responsibles)
+    @ManyToOne(type => EVillage, village => village.responsibles, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({ name: 'r_villagecodefull', referencedColumnName: 'villagecodefull' })
     @JoinColumn({ name: 'r_villagecode', referencedColumnName: 'villagecode' })
     /*@JoinColumn({ name: 'r_tamboncode', referencedColumnName: 'tamboncode' })
@@ -48,7 +50,9 @@ export class EResponsible {
     @JoinColumn({ name: 'r_changwatcode', referencedColumnName: 'changwatcode' })*/
     village: EVillage;
 
-    @ManyToOne(type => EWork, work => work.responsibles)
+    @ManyToOne(type => EWork, work => work.responsibles, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({ name: 'id_work', referencedColumnName: 'id_work' })
     work: EWork;
 }

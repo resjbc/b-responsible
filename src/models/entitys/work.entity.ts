@@ -11,6 +11,9 @@ export class EWork {
     @Column('text')
     work: string;
 
+    @Column()
+    active: boolean;
+
     @OneToMany(type => EResponsible, responsible => responsible.work)
     responsibles: EResponsible[];
 
