@@ -3,13 +3,14 @@ import { EChangwat } from "./changwat.entity";
 import { ETambon } from "./tambon.entity";
 
 @Entity('campur_responsible')
+@Index(["ampurcodefull"])
 export class EAmphur {
 
     @PrimaryColumn('varchar', { length: "2" , nullable: false})
     ampurcode: string;
 
     @PrimaryColumn('varchar', { length: "4" , nullable: false})
-    @Index("idx1")
+    //@Index("idx1")
     ampurcodefull: string;
 
     @PrimaryColumn('varchar', { length: "2" , nullable: false})

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn, Index } from "typeorm";
+import { Entity, Column, PrimaryColumn, Index, OneToMany } from "typeorm";
+import { EUser } from "./user.entity";
 
 @Entity('chospital_responsible')
 @Index("changwatcode",["provcode", "distcode", "subdistcode", "hoscode"])
@@ -56,6 +57,9 @@ export class EHospital {
 
     @Column({type: "char", length: "5" , nullable: true})
     hmain_sent: string;
+
+    @OneToMany(type => EUser, user => user.hoscode)
+    users: EUser[];
 
     
 

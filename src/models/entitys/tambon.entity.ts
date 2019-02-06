@@ -3,13 +3,14 @@ import { EAmphur } from "./amphur.entity";
 import { EVillage } from "./village.entity";
 
 @Entity('ctambon_responsible')
+@Index(["tamboncodefull"])
 export class ETambon {
 
     @PrimaryColumn('varchar', { length: "2" , nullable: false})
     tamboncode: string;
 
     @PrimaryColumn('varchar', { length: "6" , nullable: false})
-    @Index("idx1")
+   // @Index("idx1")
     tamboncodefull: string;
 
     @PrimaryColumn('varchar', { length: "4" , nullable: false})
