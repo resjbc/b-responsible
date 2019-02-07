@@ -35,9 +35,11 @@ export class UserService {
           "tambon.tambonname",
           "amphur.ampurname",
           "changwat.changwatname",
-          "hospital.hosname"
+          "hospital.hosname",
+          "position.position"
           ])
       .leftJoin("user.responsibles","responsible")
+      .leftJoin("user.position","position")
       .leftJoin("user.hospital","hospital")
       .leftJoin("responsible.work","work")
       .leftJoin("responsible.village","village")

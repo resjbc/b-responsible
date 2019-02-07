@@ -8,6 +8,7 @@ import { EHospital } from './entitys/hospital.entity';
 import { EUser } from './entitys/user.entity';
 import { EResponsible } from './entitys/responsible.entity';
 import { EWork } from './entitys/work.entity';
+import { EPosition } from './entitys/position.entity';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { EWork } from './entitys/work.entity';
       TypeOrmModule.forFeature([EUser]),
       TypeOrmModule.forFeature([EWork]),
       TypeOrmModule.forFeature([EResponsible]),
+      TypeOrmModule.forFeature([EPosition]),
     ],
     providers: [
      

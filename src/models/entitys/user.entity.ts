@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMan
 import { EVillage } from "./village.entity";
 import { EResponsible } from "./responsible.entity";
 import { EHospital } from "./hospital.entity";
+import { EPosition } from "./position.entity";
 
 @Entity('user_responsible')
 export class EUser {
@@ -27,8 +28,11 @@ export class EUser {
     @Column({ length: "5", nullable: true })
     hoscode: string;
 
-    @Column({ length: "2", nullable: true })
-    flag_active: string;
+    @Column({ nullable: true })
+    id_position: number;
+
+    @Column({nullable: true })
+    flag_active: boolean;
 
     @Column()
     date_created: Date;
@@ -45,4 +49,9 @@ export class EUser {
     @ManyToOne(type => EHospital, hospital => hospital.users)
     @JoinColumn({ name: 'hoscode', referencedColumnName: "hoscode" })
     hospital: EHospital;
+
+
+    @ManyToOne(type => EPosition, position => position.users)
+    @JoinColumn({ name: 'id_position', referencedColumnName: "id_position" })
+    position: EPosition;
 }
