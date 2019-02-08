@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { IRegister, ILogin } from '../interfaces/app.interface';
+import { ILogin } from '../interfaces/app.interface';
 
 @Injectable()
 export class AppService {
@@ -8,7 +8,7 @@ export class AppService {
   }
 
   //ลงทะเบียน
-  async onRegister(body: IRegister) {
+  async onRegister(/*body: IRegister*/) {
     /*const count = await this.MemberCollection.count({ email: body.email });
     if (count > 0) throw new BadRequestException('มีอีเมล์นี้ในระบบแล้ว');
     delete body.cpassword;

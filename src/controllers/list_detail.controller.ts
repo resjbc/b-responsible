@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Body } from "@nestjs/common";
 import { ListDetailService } from "../services/list_detail.service";
 
 
@@ -12,7 +12,17 @@ export class ListDetailController {
     }
 
     @Get("tambons/:amphurcode")
-    getTambons(@Param() amphurcode: { amphurcode: number }) {
+    getTambons(@Param() amphurcode: { amphurcode: any }) {
         return this.list_detailService.getTambons(amphurcode.amphurcode);
+    }
+
+    @Get("villages/:tamboncode")
+    getVillages(@Param() tamboncode: { tamboncode: any }) {
+        return this.list_detailService.getVillages(tamboncode.tamboncode);
+    }
+
+    @Get("hospitals")
+    getHospitals(@Body() amphurcodefull: { amphurcode: any , changwatcode: any}) {
+        return this.list_detailService.getHospitals(amphurcodefull.amphurcode, amphurcodefull.changwatcode);
     }
 }

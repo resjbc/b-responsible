@@ -40,4 +40,29 @@ export class ListDetailService {
 
         return tambons;
     }
+
+    async getVillages(tamboncodefull: any) {
+
+        const villages = await this.villageRepository.createQueryBuilder('village')
+            .select()
+            .where("village.tamboncode = :tamboncodefull", { tamboncodefull: tamboncodefull })
+            .andWhere("village.flag_status = 0")
+            .getMany();
+
+        return villages;
+    }
+
+    async getHospitals(amphurcode: any, changwatcode: any) {
+
+
+        const hospitals = await this.hospitalRepository.createQueryBuilder('hospital')
+            .select()
+            .where("hospital.provcode = :changwatcode", { changwatcode: changwatcode })
+            .andWhere("hospital.distcode = :amphurcode", { amphurcode: amphurcode })
+            .getMany();
+
+        return hospitals;
+
+        
+    }
 }
