@@ -30,6 +30,7 @@ export class UserService {
           "user.hoscode",
           "user.role",
           "responsible.r_id_user",
+          "responsible.address",
           "work.work",
           "village.villagename",
           "tambon.tambonname",

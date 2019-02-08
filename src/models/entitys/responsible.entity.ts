@@ -25,7 +25,8 @@ export class EResponsible {
     @PrimaryColumn('varchar', { length: "2", nullable: false })
     r_changwatcode: string;*/
 
-
+    @Column('varchar', { length: "255", nullable: true })
+    address: string;
 
     @PrimaryColumn()
     id_work: number;
