@@ -8,19 +8,24 @@ import { UserController } from './controllers/user.controller';
 import { UserService } from './services/user.service';
 import { ListDetailService } from './services/list_detail.service';
 import { ListDetailController } from './controllers/list_detail.controller';
+import { JwtAuthenService,JwtAuthenStrategy } from './services/jwt-authen.service';
+import { AccountController } from './controllers/account.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
   controllers: [
     AppController ,
     UserController,
-    ListDetailController
+    ListDetailController,
+    AccountController
 
   ],
   providers: [
     AppService ,
     UserService,
-    ListDetailService
+    ListDetailService,
+    JwtAuthenService,
+    JwtAuthenStrategy
   ],
 })
 export class AppModule {}

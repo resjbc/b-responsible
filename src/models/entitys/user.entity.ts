@@ -3,6 +3,9 @@ import { EVillage } from "./village.entity";
 import { EResponsible } from "./responsible.entity";
 import { EHospital } from "./hospital.entity";
 import { EPosition } from "./position.entity";
+import { IRegister, ILogin } from "../../interfaces/app.interface";
+import { IsNotEmpty, Matches } from "class-validator";
+import { IsComparePassword } from "../../pipes/validation.pipe";
 
 @Entity('user_responsible')
 export class EUser {
@@ -55,3 +58,44 @@ export class EUser {
     @JoinColumn({ name: 'id_position', referencedColumnName: "id_position" })
     position: EPosition;
 }
+
+
+export class RegisterBody implements IRegister {
+
+    @Matches(/^[0-9]{13,13}$/ , {message:"ตรวจสอบ หมายเลขบัตรประชาชน"})
+    cid: any;
+    
+    @IsNotEmpty({ message:'กรุณากรอก Username'})
+    username: string;
+
+    @IsNotEmpty()
+    id_position: number;
+
+    
+    @IsNotEmpty() 
+    @Matches(/^[0-9]{5,5}$/)
+    hoscode: string;
+    @IsNotEmpty() firstname: string;
+    @IsNotEmpty() lastname: string;
+
+
+    @IsNotEmpty() 
+    @Matches(/^[A-z0-9]{6,15}$/)
+    password: string;
+
+    @IsNotEmpty()
+    @IsComparePassword('password')
+    cpassword: string;
+
+}
+
+
+export class LoginBody implements ILogin {
+    @IsNotEmpty()
+    username: string;
+    @IsNotEmpty()
+    password: string;
+}
+
+
+

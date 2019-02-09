@@ -9,21 +9,24 @@ export interface IAccount {
     cid: string;
     hoscode: string;
     id_position: number;
-    flag_active: boolean;
-    date_created: Date;
-    date_updated: Date;
-    role: number;
+    flag_active?: boolean;
+    date_created?: Date;
+    date_updated?: Date;
+    role?: number;
 
 }
 
-/*// ลงทะเบียน
+// ลงทะเบียน
 export interface IRegister {
     firstname: string;
     lastname: string;
     cid: string;
+    username:string;
     password: string;
+    id_position: number;
     cpassword: string;
-}*/
+    hoscode: string;
+}
 
 // เข้าสู่ระบบ
 export interface ILogin {
