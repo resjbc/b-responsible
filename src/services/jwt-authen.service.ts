@@ -19,18 +19,28 @@ export class JwtAuthenService implements IAuthen {
     secretKey: string = "Hitman"
 
     async generateAccessToken(user: IAccount) {
-        const payload = { cid: user.cid }
+        const payload = { username: user.username }
         return sign(payload, this.secretKey, { expiresIn: 60 * 60 });
     }
 
     //ยืนยันผู้ใช้เข้าสู่ระบบ
-    async validateUser({cid}): Promise<IAccount> {
+    async validateUser({username}): Promise<IAccount> {
         //console.log(cid);
         try {
             const user = await this.userRepository
                 .createQueryBuilder('user')
-                .select()
-                .where("user.cid = :cid", { cid: cid })
+                .select([
+                    "user.username",
+                    "user.password",
+                    "user.firstname",
+                    "user.lastname",
+                    "user.cid",
+                    "user.hoscode",
+                    "user.role",
+                    "user.id_user",
+                    "position.position"])
+                .leftJoin("user.position","position")
+                .where("user.username = :username", { username: username })
                 .getOne();
             //console.log(member);
             return user;
@@ -52,7 +62,7 @@ export class JwtAuthenStrategy extends PassportStrategy(Strategy) {
         });
     }
 
-    async validate(payload: { cid: string }) {
+    async validate(payload: { username: string }) {
         const user = await this.authService.validateUser(payload);
         if (!user) {
             throw new UnauthorizedException('กรุณาล็อกอินใหม่');

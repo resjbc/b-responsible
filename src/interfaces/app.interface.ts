@@ -40,3 +40,9 @@ export enum RoleAccount {
     Employee,
     Admin
 }
+
+export interface IChangePassword {
+    old_pass: string;
+    new_pass: string;
+    cnew_pass: string;
+}

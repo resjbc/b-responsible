@@ -1,3 +1,4 @@
+import { IChangePassword } from './../../interfaces/app.interface';
 import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { EVillage } from "./village.entity";
 import { EResponsible } from "./responsible.entity";
@@ -95,6 +96,17 @@ export class LoginBody implements ILogin {
     username: string;
     @IsNotEmpty()
     password: string;
+}
+
+export class ChangePasswordBody implements IChangePassword  {
+    @IsNotEmpty()
+    old_pass: string;
+    @IsNotEmpty()
+    @Matches(/^[A-z0-9]{6,15}$/)
+    new_pass: string;
+    @IsNotEmpty()
+    @IsComparePassword('new_pass')
+    cnew_pass: string;
 }
 
 

@@ -1,7 +1,7 @@
 import { ValidationPipe } from './../pipes/validation.pipe';
 import { Get, Controller, Post, Body } from '@nestjs/common';
 import { AppService } from '../services/app.service';
-import { RegisterBody } from '../models/entitys/user.entity';
+import { RegisterBody, LoginBody } from '../models/entitys/user.entity';
 
 @Controller()
 export class AppController {
@@ -11,6 +11,11 @@ export class AppController {
   root(): string {
     return this.appService.root();
   }
+
+  @Post('login')
+    Login(@Body(new ValidationPipe()) body: LoginBody) {
+        return this.appService.onLogin(body);
+    }
 
   // ลงทะเบียน
   @Post('register') 

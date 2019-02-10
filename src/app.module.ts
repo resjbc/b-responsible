@@ -10,6 +10,7 @@ import { ListDetailService } from './services/list_detail.service';
 import { ListDetailController } from './controllers/list_detail.controller';
 import { JwtAuthenService,JwtAuthenStrategy } from './services/jwt-authen.service';
 import { AccountController } from './controllers/account.controller';
+import { AccountService } from './services/account.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
@@ -22,6 +23,7 @@ import { AccountController } from './controllers/account.controller';
   ],
   providers: [
     AppService ,
+    AccountService,
     UserService,
     ListDetailService,
     JwtAuthenService,
