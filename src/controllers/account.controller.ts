@@ -2,7 +2,7 @@ import { Req, Controller, Post, Body, Get, UseGuards } from "@nestjs/common";
 import { IAccount } from "../interfaces/app.interface";
 import { Request } from 'express';
 import { ValidationPipe } from "../pipes/validation.pipe";
-import { ChangePasswordBody } from "../models/entitys/user.entity";
+import { ChangePasswordBody, AccountBody } from "../models/entitys/user.entity";
 import { AppService } from "../services/app.service";
 import { AuthGuard } from "@nestjs/passport";
 import { AccountService } from "../services/account.service";
@@ -26,6 +26,11 @@ export class AccountController {
     @Post('change-password') //เปลี่ยนรหัสผ่าน
     changePassword(@Req() req: Request, @Body(new ValidationPipe()) body: ChangePasswordBody) {
         return this.accountService.onChangePassword(req.user.id_user, body);
+    }
+
+    @Post('update-account') 
+    updateAccount(@Req() req: Request, @Body(new ValidationPipe()) body: AccountBody) {
+        return this.accountService.onUpdateAccount(req.user.id_user, body);
     }
 
 }

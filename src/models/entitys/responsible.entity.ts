@@ -37,7 +37,9 @@ export class EResponsible {
     @Column()
     date_updated: Date;
 
-    @ManyToOne(type => EUser, user => user.responsibles)
+    @ManyToOne(type => EUser, user => user.responsibles ,{
+        onDelete: "CASCADE"
+    })
     @JoinColumn({ name: 'r_id_user', referencedColumnName: 'id_user' })
     user: EUser;
 

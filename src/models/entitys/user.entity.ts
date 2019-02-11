@@ -1,11 +1,11 @@
-import { IChangePassword } from './../../interfaces/app.interface';
+import { IChangePassword, IAccount } from './../../interfaces/app.interface';
 import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { EVillage } from "./village.entity";
 import { EResponsible } from "./responsible.entity";
 import { EHospital } from "./hospital.entity";
 import { EPosition } from "./position.entity";
 import { IRegister, ILogin } from "../../interfaces/app.interface";
-import { IsNotEmpty, Matches } from "class-validator";
+import { IsNotEmpty, Matches, IsNumberString } from "class-validator";
 import { IsComparePassword } from "../../pipes/validation.pipe";
 
 @Entity('user_responsible')
@@ -35,7 +35,7 @@ export class EUser {
     @Column({ nullable: true })
     id_position: number;
 
-    @Column({nullable: true })
+    @Column({ nullable: true })
     flag_active: boolean;
 
     @Column()
@@ -63,24 +63,24 @@ export class EUser {
 
 export class RegisterBody implements IRegister {
 
-    @Matches(/^[0-9]{13,13}$/ , {message:"ตรวจสอบ หมายเลขบัตรประชาชน"})
+    @Matches(/^[0-9]{13,13}$/, { message: "ตรวจสอบ หมายเลขบัตรประชาชน" })
     cid: any;
-    
-    @IsNotEmpty({ message:'กรุณากรอก Username'})
+
+    @IsNotEmpty({ message: 'กรุณากรอก Username' })
     username: string;
 
     @IsNotEmpty()
     id_position: number;
 
-    
-    @IsNotEmpty() 
+
+    @IsNotEmpty()
     @Matches(/^[0-9]{5,5}$/)
     hoscode: string;
     @IsNotEmpty() firstname: string;
     @IsNotEmpty() lastname: string;
 
 
-    @IsNotEmpty() 
+    @IsNotEmpty()
     @Matches(/^[A-z0-9]{6,15}$/)
     password: string;
 
@@ -98,7 +98,7 @@ export class LoginBody implements ILogin {
     password: string;
 }
 
-export class ChangePasswordBody implements IChangePassword  {
+export class ChangePasswordBody implements IChangePassword {
     @IsNotEmpty()
     old_pass: string;
     @IsNotEmpty()
@@ -107,6 +107,33 @@ export class ChangePasswordBody implements IChangePassword  {
     @IsNotEmpty()
     @IsComparePassword('new_pass')
     cnew_pass: string;
+}
+
+
+export class AccountBody implements IAccount {
+
+    @Matches(/^[0-9]{13,13}$/, { message: "ตรวจสอบ หมายเลขบัตรประชาชน" })
+    cid: any;
+    @IsNotEmpty({ message: 'กรุณากรอก Username' })
+    username: string;
+    @IsNotEmpty()
+    id_position: number;
+    @IsNotEmpty()
+    @Matches(/^[0-9]{5,5}$/)
+    hoscode: string;
+    @IsNotEmpty()
+    firstname: string;
+    @IsNotEmpty()
+    lastname: string;
+    role?: number;
+    flag_active?: boolean;
+    id_user?: any;
+}
+
+export class ParamDeleteUser {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_user?: any;
 }
 
 

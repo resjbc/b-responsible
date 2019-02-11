@@ -11,6 +11,8 @@ import { ListDetailController } from './controllers/list_detail.controller';
 import { JwtAuthenService,JwtAuthenStrategy } from './services/jwt-authen.service';
 import { AccountController } from './controllers/account.controller';
 import { AccountService } from './services/account.service';
+import { WorkService } from './services/work.service';
+import { WorkController } from './controllers/work.controller';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
@@ -18,13 +20,15 @@ import { AccountService } from './services/account.service';
     AppController ,
     UserController,
     ListDetailController,
-    AccountController
+    AccountController,
+    WorkController
 
   ],
   providers: [
     AppService ,
     AccountService,
     UserService,
+    WorkService,
     ListDetailService,
     JwtAuthenService,
     JwtAuthenStrategy

@@ -20,6 +20,8 @@ export class AppService {
   async onRegister(body: IRegister) {
     const count = await this.userRepository.count({ username: body.username });
     if (count > 0) throw new BadRequestException('มี Username นี้ในระบบแล้ว');
+    const count_ = await this.userRepository.count({ cid: body.cid });
+    if (count_ > 0) throw new BadRequestException('มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว');
     delete body.cpassword;
 
     let model: IAccount = body;
