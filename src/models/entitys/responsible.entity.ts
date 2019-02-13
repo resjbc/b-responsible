@@ -2,6 +2,8 @@ import { Entity, Column, PrimaryColumn, Index, PrimaryGeneratedColumn, ManyToMan
 import { EUser } from "./user.entity";
 import { EVillage } from "./village.entity";
 import { EWork } from "./work.entity";
+import { IResponsible } from "../../interfaces/app.interface";
+import { IsNotEmpty, IsNumber } from "class-validator";
 
 @Entity('responsible_responsible')
 //@Index(["r_villagecode", "r_villagecodefull", "r_tamboncode", "r_ampurcode", "r_changwatcode"])
@@ -58,4 +60,20 @@ export class EResponsible {
     })
     @JoinColumn({ name: 'id_work', referencedColumnName: 'id_work' })
     work: EWork;
+}
+
+export class ResponsibleBody implements IResponsible {
+    @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
+    @IsNumber()
+    r_id_user: number;
+    @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
+    r_villagecode: string;
+    @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
+    r_villagecodefull: string;
+    address?: string;
+    @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
+    @IsNumber()
+    id_work: number;
+    date_created?: Date;
+    date_updated?: Date;
 }

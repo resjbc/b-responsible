@@ -3,7 +3,6 @@ import { IAccount } from "../interfaces/app.interface";
 import { Request } from 'express';
 import { ValidationPipe } from "../pipes/validation.pipe";
 import { ChangePasswordBody, AccountBody } from "../models/entitys/user.entity";
-import { AppService } from "../services/app.service";
 import { AuthGuard } from "@nestjs/passport";
 import { AccountService } from "../services/account.service";
 

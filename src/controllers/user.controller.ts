@@ -1,24 +1,31 @@
 import { Controller, Get, Delete, Param, Post, Body, Put } from "@nestjs/common";
 import { UserService } from "../services/user.service";
 import { ValidationPipe } from "../pipes/validation.pipe";
-import { ParamDeleteUser, AccountBody } from "../models/entitys/user.entity";
+import { ParamUser, AccountBody } from "../models/entitys/user.entity";
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
-    @Get("employee")
+    @Get("responsible")
+    getResponcible() {
+        return this.userService.getResponcibles();
+    }
+
+    @Get("users")
     getUsers() {
         return this.userService.getUsers();
     }
 
-    @Get("responcible")
-    getResponcible() {
-        return this.userService.getResponcible();
+    @Get(":id_user")
+    getUser(@Param(new ValidationPipe()) param: ParamUser) {
+        return this.userService.getUser(param);
     }
 
+    
+    
     @Delete(':id_user')
-    deleteUser(@Param(new ValidationPipe()) param: ParamDeleteUser) {
+    deleteUser(@Param(new ValidationPipe()) param: ParamUser) {
         return this.userService.deleteUser(param);
     }
 

@@ -16,13 +16,23 @@ export class UserService {
 
   async getUsers() {
     const users = await this.userRepository.createQueryBuilder('user')
-      .select().where("role != 4").orderBy("user.id_user", "DESC").getMany();
+      .select().where("role != 3").orderBy("user.id_user", "DESC").getMany();
 
     if (!users) throw new BadRequestException('ไม่มีบุคคลในระบบ');
     return users;
   }
 
-  async getResponcible() {
+  async getUser(user: any) {
+    const users = await this.userRepository.createQueryBuilder('user')
+      .select()
+      .where("role != 3")
+      .andWhere("user.id_user = :id_user", { id_user: user.id_user }).getOne();
+
+    if (!users) throw new BadRequestException('ไม่มีบุคคลในระบบ');
+    return users;
+  }
+
+  async getResponcibles() {
     const user_responcibles = await this.userRepository.createQueryBuilder('user')
       .select([
         "user.firstname",
@@ -53,7 +63,7 @@ export class UserService {
     return user_responcibles;
   }
 
-  async deleteUser(user) {
+  async deleteUser(user: any) {
     return await this.userRepository.delete(user)
       .catch(err => { throw new BadRequestException(err) });;
   }
@@ -63,7 +73,7 @@ export class UserService {
     if (count > 0) throw new BadRequestException('มี Username นี้ในระบบแล้ว');
     const count_ = await this.userRepository.count({ cid: body.cid });
     if (count_ > 0) throw new BadRequestException('มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว');
-    
+
 
     let model: IAccount = body;
     model.role = RoleAccount.Member;
@@ -76,15 +86,15 @@ export class UserService {
   }
 
   async updateUser(body: IAccount) {
-   
-    if(!body.id_user) throw new BadRequestException('ตรวจสอบข้อมูล');
+
+    if (!body.id_user) throw new BadRequestException('ตรวจสอบข้อมูล');
 
     const memberItem = await this.userRepository.findOne({ cid: body.cid });
     if (memberItem && memberItem.cid === body.cid && memberItem.id_user != body.id_user) throw new BadRequestException('มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว');
 
     const memberItem_ = await this.userRepository.findOne({ username: body.username });
     if (memberItem_ && memberItem_.username === body.username && memberItem_.id_user != body.id_user) throw new BadRequestException('มี Username นี้ในระบบแล้ว');
-    
+
 
     let model: IAccount = body;
     model.date_updated = new Date();

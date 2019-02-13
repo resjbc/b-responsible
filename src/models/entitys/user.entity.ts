@@ -130,7 +130,7 @@ export class AccountBody implements IAccount {
     id_user?: any;
 }
 
-export class ParamDeleteUser {
+export class ParamUser {
     @IsNotEmpty()
     @IsNumberString()
     id_user?: any;

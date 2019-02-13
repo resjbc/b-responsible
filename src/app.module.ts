@@ -13,6 +13,8 @@ import { AccountController } from './controllers/account.controller';
 import { AccountService } from './services/account.service';
 import { WorkService } from './services/work.service';
 import { WorkController } from './controllers/work.controller';
+import { ResponsibleController } from './controllers/responsible.controller';
+import { ResponsibleService } from './services/responsible.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
@@ -21,14 +23,15 @@ import { WorkController } from './controllers/work.controller';
     UserController,
     ListDetailController,
     AccountController,
-    WorkController
-
+    WorkController,
+    ResponsibleController
   ],
   providers: [
     AppService ,
     AccountService,
     UserService,
     WorkService,
+    ResponsibleService,
     ListDetailService,
     JwtAuthenService,
     JwtAuthenStrategy
