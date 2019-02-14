@@ -37,6 +37,31 @@ export class ResponsibleService {
         return user_responcibles;
     }
 
+
+    async getResponsible_search(user: any) {
+        const user_responcibles = await this.responsibleRepository.createQueryBuilder('responsible')
+            .select([
+                "responsible.r_id_user",
+                "responsible.r_villagecode",
+                "responsible.r_villagecodefull",
+                "responsible.id_work",
+                "work.work",
+                "changwat.changwatname",
+                "amphur.ampurname",
+                "tambon.tambonname",
+                "village.villagename",
+                "responsible.address"
+            ])
+            .leftJoin("responsible.work", "work")
+            .leftJoin("responsible.village", "village")
+            .leftJoin("village.tambon", "tambon")
+            .leftJoin("tambon.amphur", "amphur")
+            .leftJoin("amphur.changwat", "changwat")
+           
+
+        return user_responcibles;
+    }
+
     async addResponsible(body: any) {
         const count = await this.responsibleRepository.count({
             r_id_user: body.r_id_user,
