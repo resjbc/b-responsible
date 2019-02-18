@@ -1,9 +1,9 @@
+import { IResponsible } from './../interfaces/app.interface';
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EUser } from "../models/entitys/user.entity";
 import { Repository } from "typeorm";
 import { EResponsible } from "../models/entitys/responsible.entity";
-import { IResponsible } from "../interfaces/app.interface";
 
 @Injectable()
 export class ResponsibleService {
@@ -38,7 +38,8 @@ export class ResponsibleService {
     }
 
 
-    async getResponsible_search(user: any) {
+    async getResponsible_search(code: any) {
+
         const user_responcibles = await this.responsibleRepository.createQueryBuilder('responsible')
             .select([
                 "responsible.r_id_user",
@@ -57,8 +58,8 @@ export class ResponsibleService {
             .leftJoin("village.tambon", "tambon")
             .leftJoin("tambon.amphur", "amphur")
             .leftJoin("amphur.changwat", "changwat")
-           
-
+            .where("responsible.r_villagecodefull like :r_villagecodefull", { r_villagecodefull: code.codefull+'%' })
+            .getMany();
         return user_responcibles;
     }
 

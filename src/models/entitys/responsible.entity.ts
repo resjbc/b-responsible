@@ -3,7 +3,7 @@ import { EUser } from "./user.entity";
 import { EVillage } from "./village.entity";
 import { EWork } from "./work.entity";
 import { IResponsible } from "../../interfaces/app.interface";
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber, IsNumberString } from "class-validator";
 
 @Entity('responsible_responsible')
 //@Index(["r_villagecode", "r_villagecodefull", "r_tamboncode", "r_ampurcode", "r_changwatcode"])
@@ -76,4 +76,10 @@ export class ResponsibleBody implements IResponsible {
     id_work: number;
     date_created?: Date;
     date_updated?: Date;
+}
+
+export class ParamResponsibleSearch {
+    @IsNotEmpty()
+    @IsNumberString()
+    codefull?: any;
 }
