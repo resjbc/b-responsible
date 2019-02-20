@@ -42,7 +42,10 @@ export class ResponsibleService {
 
         const user_responcibles = await this.responsibleRepository.createQueryBuilder('responsible')
             .select([
-                "responsible.r_id_user",
+                "user.firstname",
+                "user.lastname",
+                "position.position",
+                //"responsible.r_id_user",
                 "responsible.r_villagecode",
                 "responsible.r_villagecodefull",
                 "responsible.id_work",
@@ -54,6 +57,8 @@ export class ResponsibleService {
                 "responsible.address"
             ])
             .leftJoin("responsible.work", "work")
+            .leftJoin("responsible.user", "user")
+            .leftJoin("user.position", "position")
             .leftJoin("responsible.village", "village")
             .leftJoin("village.tambon", "tambon")
             .leftJoin("tambon.amphur", "amphur")
