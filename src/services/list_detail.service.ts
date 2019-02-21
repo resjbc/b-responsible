@@ -6,6 +6,7 @@ import { EAmphur } from "../models/entitys/amphur.entity";
 import { ETambon } from "../models/entitys/tambon.entity";
 import { EVillage } from "../models/entitys/village.entity";
 import { EHospital } from "../models/entitys/hospital.entity";
+import { EPosition } from "../models/entitys/position.entity";
 
 
 @Injectable()
@@ -21,6 +22,8 @@ export class ListDetailService {
         private readonly villageRepository: Repository<EVillage>,
         @InjectRepository(EHospital)
         private readonly hospitalRepository: Repository<EHospital>,
+        @InjectRepository(EPosition)
+        private readonly positionRepository: Repository<EPosition>,
     ) { }
 
     async getAmphurs() {
@@ -62,7 +65,12 @@ export class ListDetailService {
             .getMany();
 
         return hospitals;
+    }
 
-        
+    async getPositions() {
+        const positions = await this.positionRepository.createQueryBuilder('position')
+            .select().getMany();
+
+        return positions;
     }
 }

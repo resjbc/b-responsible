@@ -25,4 +25,9 @@ export class ListDetailController {
     getHospitals(@Body() amphurcodefull: { amphurcode: any , changwatcode: any}) {
         return this.list_detailService.getHospitals(amphurcodefull.amphurcode, amphurcodefull.changwatcode);
     }
+
+    @Get("positions")
+    getPositions() {
+        return this.list_detailService.getPositions();
+    }
 }

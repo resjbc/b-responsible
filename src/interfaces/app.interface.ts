@@ -1,6 +1,5 @@
 // ข้อมูลสมาชิก
 export interface IAccount {
-   
     id_user?: string;
     username?: string;
     password?: string;
@@ -13,7 +12,7 @@ export interface IAccount {
     date_created?: Date;
     date_updated?: Date;
     role?: number;
-
+    
 }
 
 // ลงทะเบียน
