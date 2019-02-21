@@ -55,7 +55,7 @@ export class ListDetailService {
         return villages;
     }
 
-    async getHospitals(amphurcode: any, changwatcode: any) {
+    async getHospitals(amphurcode: any, changwatcode: any = "94") {
 
 
         const hospitals = await this.hospitalRepository.createQueryBuilder('hospital')

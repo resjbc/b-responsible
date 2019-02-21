@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Body } from "@nestjs/common";
+import { Controller, Get, Param, Body, Query } from "@nestjs/common";
 import { ListDetailService } from "../services/list_detail.service";
 
 
@@ -22,8 +22,8 @@ export class ListDetailController {
     }
 
     @Get("hospitals")
-    getHospitals(@Body() amphurcodefull: { amphurcode: any , changwatcode: any}) {
-        return this.list_detailService.getHospitals(amphurcodefull.amphurcode, amphurcodefull.changwatcode);
+    getHospitals(@Query('amphurcode') amphurcode: any, @Query('changwatcode') changwatcode: any) {
+        return this.list_detailService.getHospitals(amphurcode, changwatcode);
     }
 
     @Get("positions")
