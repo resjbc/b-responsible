@@ -18,7 +18,7 @@ export class AccountController {
     @Get('data') // แสดงข้อมูลผู้ใช้งานที่เข้าสู่ระบบ
     getUserLogin(@Req() req: Request) {
         const userLogin: IAccount = req.user as IAccount;
-        userLogin.username = '';
+        //userLogin.username = '';
         userLogin.password = '';
         return userLogin;
     }

@@ -72,7 +72,7 @@ export class ResponsibleBody implements IResponsible {
     r_villagecodefull: string;
     address?: string;
     @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
-    @IsNumber()
+    @IsNumberString()
     id_work: number;
     date_created?: Date;
     date_updated?: Date;

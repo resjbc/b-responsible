@@ -38,7 +38,8 @@ export class JwtAuthenService implements IAuthen {
                     "user.hoscode",
                     "user.role",
                     "user.id_user",
-                    "position.position"])
+                    "position.position",
+                    "position.id_position"])
                 .leftJoin("user.position","position")
                 .where("user.id_user = :id_user", { id_user: id_user })
                 .getOne();
