@@ -9,6 +9,9 @@ import { IsNotEmpty, IsNumber, IsNumberString } from "class-validator";
 //@Index(["r_villagecode", "r_villagecodefull", "r_tamboncode", "r_ampurcode", "r_changwatcode"])
 export class EResponsible {
 
+    @PrimaryGeneratedColumn()
+    id_resposible: string;
+
     @PrimaryColumn()
     r_id_user: string;
 
