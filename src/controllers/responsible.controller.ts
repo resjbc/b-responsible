@@ -2,7 +2,7 @@ import { Controller, Get, Param, Delete, Body, Post, Put, UseGuards } from "@nes
 import { ResponsibleService } from "../services/responsible.service";
 import { ValidationPipe } from "../pipes/validation.pipe";
 import { ParamUser } from "../models/entitys/user.entity";
-import { ResponsibleBody, ParamResponsibleSearch } from "../models/entitys/responsible.entity";
+import { ResponsibleBody, ParamResponsibleSearch, ParamResponsible } from "../models/entitys/responsible.entity";
 import { AuthGuard } from "@nestjs/passport";
 import { RoleGuard } from "../guards/role.gurad";
 import { RoleAccount } from "../interfaces/app.interface";
@@ -37,9 +37,9 @@ export class ResponsibleController {
     }
 
 
-    @Delete()
+    @Delete(':id_responsible')
     @UseGuards(new RoleGuard(RoleAccount.Member, RoleAccount.Employee, RoleAccount.Admin))
-    deleteResponsible(@Body(new ValidationPipe()) body: ResponsibleBody) {
-        return this.responsibleService.deleteResponsible(body);
+    deleteResponsible(@Param(new ValidationPipe()) param: ParamResponsible) {
+        return this.responsibleService.deleteResponsible(param);
     }
 }

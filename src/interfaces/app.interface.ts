@@ -47,6 +47,7 @@ export interface IChangePassword {
 }
 
 export interface IResponsible {
+    id_resposible?: any
     r_id_user?: any;
     r_villagecode?: string;
     r_villagecodefull?: string;

@@ -10,7 +10,7 @@ import { IsNotEmpty, IsNumber, IsNumberString } from "class-validator";
 export class EResponsible {
 
     @PrimaryGeneratedColumn()
-    id_resposible: string;
+    id_responsible: string;
 
     @PrimaryColumn()
     r_id_user: string;
@@ -66,6 +66,7 @@ export class EResponsible {
 }
 
 export class ResponsibleBody implements IResponsible {
+    id_responsible?: string;
     @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
     @IsNumber()
     r_id_user: number;
@@ -85,4 +86,10 @@ export class ParamResponsibleSearch {
     @IsNotEmpty()
     @IsNumberString()
     codefull?: any;
+}
+
+export class ParamResponsible {
+    @IsNotEmpty()
+    @IsNumberString()
+    id_responsible: string;
 }

@@ -3,7 +3,7 @@ import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EUser } from "../models/entitys/user.entity";
 import { Repository } from "typeorm";
-import { EResponsible } from "../models/entitys/responsible.entity";
+import { EResponsible, ParamResponsible } from "../models/entitys/responsible.entity";
 
 @Injectable()
 export class ResponsibleService {
@@ -15,6 +15,7 @@ export class ResponsibleService {
     async getResponsible(user: any) {
         const user_responcibles = await this.responsibleRepository.createQueryBuilder('responsible')
             .select([
+                "responsible.id_responsible",
                 "responsible.r_id_user",
                 "responsible.r_villagecode",
                 "responsible.r_villagecodefull",
@@ -111,8 +112,9 @@ export class ResponsibleService {
     }
 
 
-    async deleteResponsible(responsible: IResponsible) {
-        return await this.responsibleRepository.delete(responsible)
+    async deleteResponsible(responsible: ParamResponsible) {
+        console.log(responsible.id_responsible)
+        return await this.responsibleRepository.delete({ id_responsible: responsible.id_responsible })
             .catch(err => { throw new BadRequestException(err) });;
     }
 }
