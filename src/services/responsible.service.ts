@@ -88,19 +88,23 @@ export class ResponsibleService {
     }
 
     async updateResponsible(body: any) {
-        const count = await this.responsibleRepository.count({
+        const responsible = await this.responsibleRepository.findOne({
             r_id_user: body.r_id_user,
             r_villagecode: body.r_villagecode,
             r_villagecodefull: body.r_villagecodefull,
             id_work: body.id_work,
             address: body.address,
         });
-        if (count > 0) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
+
+        if(responsible && responsible.id_responsible != body.id_responsible) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
+
+        //if (count > 0) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
 
         let model: IResponsible = body;
         model.date_updated = new Date();
         const modelItem = await this.responsibleRepository.update(
             {
+                id_responsible:body.id_responsible,
                 r_id_user: body.r_id_user,
                 r_villagecode: body.r_villagecode,
                 r_villagecodefull: body.r_villagecodefull,
