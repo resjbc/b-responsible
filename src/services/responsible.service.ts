@@ -46,6 +46,7 @@ export class ResponsibleService {
                 "user.firstname",
                 "user.lastname",
                 "position.position",
+                "hospital.hosname",
                 //"responsible.r_id_user",
                 "responsible.r_villagecode",
                 "responsible.r_villagecodefull",
@@ -59,12 +60,14 @@ export class ResponsibleService {
             ])
             .leftJoin("responsible.work", "work")
             .leftJoin("responsible.user", "user")
+            .leftJoin("user.hospital", "hospital")
             .leftJoin("user.position", "position")
             .leftJoin("responsible.village", "village")
             .leftJoin("village.tambon", "tambon")
             .leftJoin("tambon.amphur", "amphur")
             .leftJoin("amphur.changwat", "changwat")
             .where("responsible.r_villagecodefull like :r_villagecodefull", { r_villagecodefull: code.codefull+'%' })
+            .orderBy("responsible.r_villagecodefull")
             .getMany();
         return user_responcibles;
     }
