@@ -33,5 +33,5 @@ export class ParamWork {
     id_work?: any;
     @IsNotEmpty()
     work: string;
-    active: boolean;
+    active?: boolean;
 }

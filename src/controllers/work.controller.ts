@@ -1,4 +1,4 @@
-import { Controller, Get, Delete, Param, Post, Body, UseGuards } from "@nestjs/common";
+import { Controller, Get, Delete, Param, Post, Body, UseGuards, Put } from "@nestjs/common";
 import { WorkService } from "../services/work.service";
 import { ValidationPipe } from "../pipes/validation.pipe";
 import { ParamDeleteWork, ParamWork } from "../models/entitys/work.entity";
@@ -28,7 +28,13 @@ export class WorkController {
 
     @Post()
     @UseGuards(new RoleGuard(RoleAccount.Employee,RoleAccount.Admin))
-    addAndupdateWork(@Body(new ValidationPipe()) body: ParamWork) {
+    addWork(@Body(new ValidationPipe()) body: ParamWork) {
+        return this.workService.addAndupdateWork(body);
+    }
+
+    @Put()
+    @UseGuards(new RoleGuard(RoleAccount.Employee,RoleAccount.Admin))
+    updateWork(@Body(new ValidationPipe()) body: ParamWork) {
         return this.workService.addAndupdateWork(body);
     }
 
