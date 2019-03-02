@@ -1,3 +1,4 @@
+import { PositionController } from './controllers/position.controller';
 import { Module } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { AppService } from './services/app.service';
@@ -15,6 +16,7 @@ import { WorkService } from './services/work.service';
 import { WorkController } from './controllers/work.controller';
 import { ResponsibleController } from './controllers/responsible.controller';
 import { ResponsibleService } from './services/responsible.service';
+import { PositionService } from 'services/position.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
@@ -24,6 +26,7 @@ import { ResponsibleService } from './services/responsible.service';
     ListDetailController,
     AccountController,
     WorkController,
+    PositionController,
     ResponsibleController
   ],
   providers: [
@@ -31,6 +34,7 @@ import { ResponsibleService } from './services/responsible.service';
     AccountService,
     UserService,
     WorkService,
+    PositionService,
     ResponsibleService,
     ListDetailService,
     JwtAuthenService,
