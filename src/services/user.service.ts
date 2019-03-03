@@ -101,4 +101,9 @@ export class UserService {
     const modelItem = await this.userRepository.update({ id_user: model.id_user }, model);
     return modelItem;
   }
+
+  async firstStart(user) {
+    const user_ = await this.userRepository.findOne({ cid: user.cid });
+    if (!user_) await this.userRepository.save(user);
+  }
 }

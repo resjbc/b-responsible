@@ -1,3 +1,4 @@
+import { PositionService } from './../services/position.service';
 import { Controller, Get, Delete, Param, Post, Body, Put, UseGuards } from "@nestjs/common";
 import { UserService } from "../services/user.service";
 import { ValidationPipe } from "../pipes/validation.pipe";
@@ -9,10 +10,29 @@ import { RoleAccount } from "../interfaces/app.interface";
 @Controller('user')
 @UseGuards(AuthGuard('jwt'))
 export class UserController {
-    constructor(private readonly userService: UserService) { }
+    constructor(
+        private readonly userService: UserService,
+        private readonly positionService: PositionService,
+        ) {
+        this.positionService.firstStart({
+            position: "นักวิชาการคอมพิวเตอร์",
+            active: true
+        })
+        this.userService.firstStart({
+            cid: 9999999999999,
+            username: "admin",
+            password: "adminssj",
+            id_position: 1,
+            hoscode: "00073",
+            firstname: "admin",
+            lastname: "ssj",
+            role: 3,
+            flag_active: true
+        });
+    }
 
     @Get("responsible")
-    @UseGuards(new RoleGuard(RoleAccount.Employee,RoleAccount.Admin))
+    @UseGuards(new RoleGuard(RoleAccount.Employee, RoleAccount.Admin))
     getResponcible() {
         return this.userService.getResponcibles();
     }
@@ -29,8 +49,8 @@ export class UserController {
         return this.userService.getUser(param);
     }
 
-    
-    
+
+
     @Delete(':id_user')
     @UseGuards(new RoleGuard(RoleAccount.Admin))
     deleteUser(@Param(new ValidationPipe()) param: ParamUser) {

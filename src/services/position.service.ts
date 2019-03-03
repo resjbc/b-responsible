@@ -41,5 +41,9 @@ export class PositionService {
         return position__;
     }
 
+    async firstStart(position) {
+        const position_ = await this.positionRepository.findOne({ position: position.position });
+        if (!position_) await this.positionRepository.save(position);
+      }
 
 }
