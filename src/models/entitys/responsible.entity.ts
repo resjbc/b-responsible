@@ -66,7 +66,7 @@ export class EResponsible {
 }
 
 export class ResponsibleBody implements IResponsible {
-    id_responsible?: string;
+    id_responsible?: any;
     @IsNotEmpty({ message: 'ตรวจสอบข้อมูล' })
     @IsNumber()
     r_id_user: number;

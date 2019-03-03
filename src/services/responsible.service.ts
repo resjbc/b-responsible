@@ -66,7 +66,7 @@ export class ResponsibleService {
             .leftJoin("village.tambon", "tambon")
             .leftJoin("tambon.amphur", "amphur")
             .leftJoin("amphur.changwat", "changwat")
-            .where("responsible.r_villagecodefull like :r_villagecodefull", { r_villagecodefull: code.codefull+'%' })
+            .where("responsible.r_villagecodefull like :r_villagecodefull", { r_villagecodefull: code.codefull + '%' })
             .orderBy("responsible.r_villagecodefull")
             .getMany();
         return user_responcibles;
@@ -99,7 +99,7 @@ export class ResponsibleService {
             address: body.address,
         });
 
-        if(responsible && responsible.id_responsible != body.id_responsible) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
+        if (responsible && responsible.id_responsible != body.id_responsible) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
 
         //if (count > 0) throw new BadRequestException('มีงานนี้ในระบบแล้ว');
 
@@ -107,14 +107,9 @@ export class ResponsibleService {
         model.date_updated = new Date();
         const modelItem = await this.responsibleRepository.update(
             {
-                id_responsible:body.id_responsible,
-                r_id_user: body.r_id_user,
-                r_villagecode: body.r_villagecode,
-                r_villagecodefull: body.r_villagecodefull,
-                id_work: body.id_work,
+                id_responsible: model.id_responsible
             },
             model);
-
         return modelItem;
     }
 
