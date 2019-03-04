@@ -27,7 +27,7 @@ export class WorkController {
     }
 
     @Post()
-    @UseGuards(new RoleGuard(RoleAccount.Employee,RoleAccount.Admin))
+    @UseGuards(new RoleGuard(RoleAccount.Member,RoleAccount.Employee,RoleAccount.Admin))
     addWork(@Body(new ValidationPipe()) body: ParamWork) {
         return this.workService.addAndupdateWork(body);
     }
