@@ -40,5 +40,10 @@ export class WorkService {
         return work__;
     }
 
+    async firstStart(work){
+        const work_ = await this.workRepository.findOne({ work: work.work });
+        if (!work_) await this.workRepository.save(work);
+    }
+
 
 }

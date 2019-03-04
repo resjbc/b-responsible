@@ -12,7 +12,12 @@ import { RoleAccount } from "../interfaces/app.interface";
 @UseGuards(AuthGuard('jwt'))
 
 export class WorkController {
-    constructor(private readonly workService: WorkService) { }
+    constructor(private readonly workService: WorkService) { 
+        workService.firstStart({
+            work: "แม่และเด็ก",
+            active: true
+        });
+    }
 
     @Get()
     @UseGuards(new RoleGuard(RoleAccount.Member,RoleAccount.Employee,RoleAccount.Admin))
