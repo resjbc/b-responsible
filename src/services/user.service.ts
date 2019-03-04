@@ -16,7 +16,7 @@ export class UserService {
 
   async getUsers() {
     const users = await this.userRepository.createQueryBuilder('user')
-      .select().where("role != 3").orderBy("user.id_user", "DESC").getMany();
+      .select().orderBy("user.id_user", "DESC").getMany();
 
     if (!users) throw new BadRequestException('ไม่มีบุคคลในระบบ');
     return users;
