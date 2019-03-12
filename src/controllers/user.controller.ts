@@ -13,22 +13,24 @@ export class UserController {
     constructor(
         private readonly userService: UserService,
         private readonly positionService: PositionService,
-        ) {
+    ) {
         this.positionService.firstStart({
             position: "นักวิชาการคอมพิวเตอร์",
             active: true
-        })
-        this.userService.firstStart({
-            cid: 9999999999999,
-            username: "admin",
-            password: "adminssj",
-            id_position: 1,
-            hoscode: "00073",
-            firstname: "admin",
-            lastname: "ssj",
-            role: 3,
-            flag_active: true
-        });
+        }).then(() => {
+            this.userService.firstStart({
+                cid: 9999999999999,
+                username: "admin",
+                password: "adminssj",
+                id_position: 1,
+                hoscode: "00073",
+                firstname: "admin",
+                lastname: "ssj",
+                role: 3,
+                flag_active: true
+            });
+        }).catch()
+
     }
 
     @Get("responsible")
