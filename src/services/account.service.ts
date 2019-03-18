@@ -27,6 +27,8 @@ export class AccountService {
 
     async onUpdateAccount(id_user: any, body: IAccount) {
 
+        if (this.validateIdCard(body.cid)) throw new BadRequestException('ตรวจสอบหมายเลขบัตรประชาชน');
+
         const memberItem = await this.userRepository.findOne({ cid: body.cid });
         if (memberItem && memberItem.cid === body.cid && memberItem.id_user !== id_user) throw new BadRequestException('มีหมายเลขบัตรประชาชนนี้ในระบบแล้ว');
 
@@ -38,6 +40,22 @@ export class AccountService {
 
         return updated;
     }
+
+    validateIdCard(cid: any) {
+        let id = cid;
+        let sum = 0;
+        let total = 0;
+        let digi = 13;
+    
+        for (let i = 0; i < 12; i++) {
+          sum = sum + ((id[i]) * digi);
+          digi--;
+        }
+        total = (11 - (sum % 11)) % 10;
+    
+        if (total != id[12]) return { cid: true };
+        return false;
+      }
 
 
 

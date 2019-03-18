@@ -18,6 +18,9 @@ export class AppService {
 
   //ลงทะเบียน
   async onRegister(body: IRegister) {
+
+    if (this.validateIdCard(body.cid)) throw new BadRequestException('ตรวจสอบหมายเลขบัตรประชาชน');
+
     const count = await this.userRepository.count({ username: body.username });
     if (count > 0) throw new BadRequestException('มี Username นี้ในระบบแล้ว');
     const count_ = await this.userRepository.count({ cid: body.cid });
@@ -47,5 +50,21 @@ export class AppService {
     user.password = "";
 
     return { accessToken: await this.authenService.generateAccessToken(user) };
+  }
+
+  validateIdCard(cid: any) {
+    let id = cid;
+    let sum = 0;
+    let total = 0;
+    let digi = 13;
+
+    for (let i = 0; i < 12; i++) {
+      sum = sum + ((id[i]) * digi);
+      digi--;
+    }
+    total = (11 - (sum % 11)) % 10;
+
+    if (total != id[12]) return { cid: true };
+    return false;
   }
 }
