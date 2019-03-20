@@ -1,7 +1,7 @@
 
 const  typeOrmConfig = {
     type: 'mysql',
-    host: '203.157.237.77',
+    host: 'localhost',
     port: 3309,
     username: 'root',
     password: 'mysql',
