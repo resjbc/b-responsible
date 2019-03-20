@@ -27,7 +27,8 @@ export class UserController {
                 firstname: "admin",
                 lastname: "ssj",
                 role: 3,
-                flag_active: true
+                date_created: new Date(),
+                date_updated: new Date()
             });
         }).catch()
 

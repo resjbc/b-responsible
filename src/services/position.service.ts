@@ -1,8 +1,7 @@
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { EWork } from "../models/entitys/work.entity";
-import { EPosition } from "models/entitys/position.entity";
+import { EPosition } from "../models/entitys/position.entity";
 
 @Injectable()
 export class PositionService {

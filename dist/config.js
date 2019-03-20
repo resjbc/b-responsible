@@ -1,5 +1,6 @@
-
-const  typeOrmConfig = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const typeOrmConfig = {
     type: 'mysql',
     host: '203.157.237.77',
     port: 3309,
@@ -8,9 +9,7 @@ const  typeOrmConfig = {
     database: 'responsible',
     synchronize: true,
     logging: true,
-    //entities: ["src/models/entitys/**/*.ts"]
     entities: ["dist/models/entitys/**/*.js"]
-
-} as any;
-
-export { typeOrmConfig };
+};
+exports.typeOrmConfig = typeOrmConfig;
+//# sourceMappingURL=config.js.map

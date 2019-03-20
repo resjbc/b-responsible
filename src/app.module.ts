@@ -16,7 +16,7 @@ import { WorkService } from './services/work.service';
 import { WorkController } from './controllers/work.controller';
 import { ResponsibleController } from './controllers/responsible.controller';
 import { ResponsibleService } from './services/responsible.service';
-import { PositionService } from 'services/position.service';
+import { PositionService } from './services/position.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),EntityModule],
